@@ -1,23 +1,28 @@
 #!/bin/bash
-code_dir=(pwd)
-log_file=/tmp/roboshop.log
-rm -rf ${log_file}
-echo -e "\e[35m Installing NGINX \e[0m
+source common.sh
+
+print_head "Installing nginx"
 yum install nginx -y &>>${log_file}
 
-echo -e "\e[35mRemoving old content\e[0m
+print_head "Removing Old Content"
 rm -rf /usr/share/nginx/html/* &>>${log_file}
 
-echo -e "\e[35mDownloading Frontend content \e[0m
+print_head "Downloading Frontend Content"
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>${log_file}
 
-echo -e "\e[35mExtracting Downloaded content \e[0m
+print_head "Extracting Downloaded Frontend"
 cd /usr/share/nginx/html
-unzip /tmp/frontend.zip  &>>${log_file}
-cp ${code_dir}/config/Nginx-robo.conf /etc/nginx/default.d/roboshop.conf 
+unzip /tmp/frontend.zip &>>${log_file}
 
-echo -e "\e[35mEnabling NGINX \e[0m
-systemctl enable nginx  &>>${log_file}
+print_head "Copying Nginx Config for RoboShop"
+cp ${code_dir}/configs/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf &>>${log_file}
 
-echo -e "\e[35mStarting  NGINX \e[0m
-systemctl start nginx   &>>${log_file}
+print_head "Enabling nginx"
+systemctl enable nginx &>>${log_file}
+
+print_head "Starting nginx"
+systemctl restart nginx &>>${log_file}
+
+
+## If any command is errored or failed, we need to stop the script
+# Status of a command need to be printed.
