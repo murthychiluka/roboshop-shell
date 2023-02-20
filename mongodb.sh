@@ -2,7 +2,7 @@
 
 print_head "Setup MongoDB repository"
 cp ${code_dir}/configs/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${log_file}
-
+status_check 
 print_head "Install MongoDB"
 yum install mongodb-org -y &>>${log_file}
 
