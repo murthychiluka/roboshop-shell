@@ -89,7 +89,7 @@ print_head "Start ${component} Service"
 systemctl restart ${component} &>>${log_file}
 status_check $?
 
-
+schema_setup
 
 
 print_head "Copy MongoDB Repo File"
@@ -104,6 +104,6 @@ print_head "Load Schema"
 mongo --host mongodb-dev.murthychiluka.online </app/schema/${component}.js &>>${log_file}
 status_check $?
 
-schema_setup
+
 
 }
