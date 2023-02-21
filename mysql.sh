@@ -1,8 +1,9 @@
 source common.sh
+
 mysql_root_password=$1
-if [ -z "{mysql_root_password}" ]; then
-echo -e "\e[31m"Missing MySQL root password argument \e[0m"
-exit1
+if [ -z "${mysql_root_password}" ]; then
+  echo -e "\e[31mMissing MySQL Root Password argument\e[0m"
+  exit 1
 fi
 print_head "disabling mysql 8 version"
 dnf module disable mysql -y 
@@ -20,6 +21,6 @@ print_head "start mySQL Service"
 systemctl start mysqld  
 status_check $?
 
-print_head "set password "
+print_head "set password"
 mysql_secure_installation --set-root-pass ${mysql_root_password}
 status_check $?
