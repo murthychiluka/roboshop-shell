@@ -16,6 +16,23 @@ exit 1
 fi
 }
 
+schema_setup() }
+if [ "${schema_type}" == "mongo" ]; then
+print_head "Copy MongoDB Repo File"
+cp ${code_dir}/configs/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log_file}
+status_check $?
+
+print_head "Install Mongo Client"
+yum install mongodb-org-shell -y &>>${log_file}
+status_check $?
+
+print_head "Load Schema"
+mongo --host mongodb-dev.murthychiluka.online </app/schema/${component}.js &>>${log_file}
+status_check $?
+fi
+}
+
+
 nodejs() {
 
 print_head "Configure NodeJS Repo"
@@ -71,6 +88,7 @@ status_check $?
 print_head "Start ${component} Service"
 systemctl restart ${component} &>>${log_file}
 status_check $?
+
 
 print_head "Copy MongoDB Repo File"
 cp ${code_dir}/configs/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log_file}
