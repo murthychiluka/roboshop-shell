@@ -90,6 +90,8 @@ systemctl restart ${component} &>>${log_file}
 status_check $?
 
 
+
+
 print_head "Copy MongoDB Repo File"
 cp ${code_dir}/configs/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log_file}
 status_check $?
@@ -101,4 +103,7 @@ status_check $?
 print_head "Load Schema"
 mongo --host mongodb-dev.murthychiluka.online </app/schema/${component}.js &>>${log_file}
 status_check $?
+
+schema_setup
+
 }
