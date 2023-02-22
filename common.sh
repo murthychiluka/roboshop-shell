@@ -50,11 +50,11 @@ status_check $?
 
 elif [ "${schema_type}" == "mysql" ]; then
 print_head "Install mysql client"
-yum install mysql -y 
+yum install mysql -y &>>${log_file}
 status_check $?
 
 print_head "Load schema"
-mysql -h mysql-dev.murthychiluka.online -uroot -p${mysql_root_password} < /app/schema/shipping.sql 
+mysql -h mysql-dev.murthychiluka.online -uroot -p${mysql_root_password} < /app/schema/shipping.sql  &>>${log_file}
 status_check $?
 fi
 
