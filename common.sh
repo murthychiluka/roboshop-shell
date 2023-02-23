@@ -159,8 +159,8 @@ app_prereq_setup
 
 print_head "Download Dependencies"
 go mod init dispatch &>>${log_file}
-go get 
-go build
+go get &>>${log_file}
+go build &>>${log_file}
 status_check $?
 
 
