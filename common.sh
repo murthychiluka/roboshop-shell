@@ -37,7 +37,7 @@ status_check $?
 }
 
 schema_setup() {
-  if [ "${schema_type}" == "mongo" ]; then
+   if [ "${schema_type}" == "mongo" ]; then
 print_head "Copy MongoDB Repo File"
 cp ${code_dir}/configs/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log_file}
 status_check $?
@@ -47,7 +47,7 @@ yum install mongodb-org-shell -y &>>${log_file}
 status_check $?
 
 print_head "Load Schema"
-mongo --host mongodb-dev.murthychiluka.online </app/schema/${component}.js &>>${log_file}
+   mongo --host mongodb-dev.murthychiluka.online </app/schema/${component}.js &>>${log_file}
 status_check $?
 
 elif [ "${schema_type}" == "mysql" ]; then
