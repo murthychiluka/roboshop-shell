@@ -8,7 +8,7 @@ Environment=CART_HOST=cart-dev.murthychiluka.online
 Environment=CART_PORT=8080
 Environment=USER_HOST=user-dev.murthychiluka.online
 Environment=USER_PORT=8080
-Environment=AMQP_HOST=rabbimq-dev.murthychiluka.online
+Environment=AMQP_HOST=rabbitmq-dev.murthychiluka.online
 Environment=AMQP_USER=roboshop
 Environment=AMQP_PASS=ROBOSHOP_USER_PASSWORD
 
